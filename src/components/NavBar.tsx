@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     title: {
         flexGrow: 1,
+        marginLeft: '1%',
+    },
+    navbarButtons: {
+
     },
 }));
 
@@ -18,10 +22,12 @@ const NavBar: React.FC = () => {
 
     return (
         <div className={classes.NavBar}>
-            <AppBar position="static">
+            <AppBar position="static" color="primary">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6">ToDoApp</Typography>
-                    <Button color="inherit">Login</Button>
+                    <div className={classes.navbarButtons}>
+                        <Button color="inherit">Login</Button>
+                    </div>
                 </Toolbar>
             </AppBar>
         </div>

@@ -20,7 +20,7 @@ const NavBar: React.FC = () => {
         <div className={classes.NavBar}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography className={classes.title} variant="h6">News</Typography>
+                    <Typography className={classes.title} variant="h6">ToDoApp</Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>

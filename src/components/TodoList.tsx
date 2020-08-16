@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { List, Theme, makeStyles } from '@material-ui/core'
 import TodoItem from './TodoItem'
 
@@ -11,15 +11,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }))
 
-const TodoList: React.FC = () => {
+interface Props {
+    todos: any
+}
+
+const TodoList: React.FC<Props> = ({todos}) => {
     const classes = useStyles()
 
     return (
         <div className={classes.TodoList}>
             <List>
-                <TodoItem todo="todo 1" />
-                <TodoItem todo="todo 2" />
-                <TodoItem todo="todo 3" />
+                {todos &&
+                    todos.map((todo: any) => (
+                        <TodoItem todo={todo.text} />
+                    ))
+                }
             </List>
         </div>
     )

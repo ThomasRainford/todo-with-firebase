@@ -1,14 +1,13 @@
 import React from 'react'
 import './App.css'
-import TodoList from './components/TodoList'
-import TodoItem from './components/TodoItem'
 import NavBar from './components/NavBar'
+import Todo from './components/Todo'
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
-      <TodoList />
+      <Todo />
     </div>
   )
 }

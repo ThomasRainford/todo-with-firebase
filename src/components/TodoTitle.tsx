@@ -4,6 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core'
 const useStyles = makeStyles((theme: Theme) => ({
     TodoTitle: {
         flexGrow: 1,
+        textAlign: 'center',
     },
 }));
 
@@ -16,7 +17,7 @@ const TodoTitle: React.FC<Props> = (props: Props) => {
 
     return (
         <div className={classes.TodoTitle}>
-            <p>{props.title}</p>
+            <h3>{props.title}</h3>
         </div>
     )
 }

@@ -5,9 +5,6 @@ import TodoItem from './TodoItem'
 const useStyles = makeStyles((theme: Theme) => ({
     TodoList: {
         flexGrow: 1,
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
     },
 }))
 

@@ -6,13 +6,15 @@ import TodoList from './TodoList';
 const useStyles = makeStyles((theme: Theme) => ({
     Todo: {
         flexGrow: 1,
+        margin: 'auto',
+        width: '50%',
     },
 }));
 
 const Todo: React.FC = () => {
     const classes = useStyles()
 
-    const [todoTitle, setTodoTitle] = useState<string>('')
+    const [todoTitle, setTodoTitle] = useState<string>('This is the Title')
     const [todos, setTodos] = useState([{
         text: 'Todo 1'
     }, {

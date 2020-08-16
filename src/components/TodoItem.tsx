@@ -1,11 +1,24 @@
 import React from 'react'
-import { ListItem, ListItemText } from '@material-ui/core'
+import { ListItem, ListItemText, makeStyles, Theme } from '@material-ui/core'
+import classes from '*.module.css'
 
-const TodoItem: React.FC = () => {
+interface Props {
+    todo: string
+}
+
+const useStyles = makeStyles((theme: Theme) => ({
+    TodoItem: {
+        flexGrow: 1,
+    },
+}))
+
+const TodoItem: React.FC<Props> = (props: Props) => {
+    const classes = useStyles()
+
     return (
-        <div className="TodoItem">
+        <div className={classes.TodoItem}>
             <ListItem>
-                <ListItemText primary="Hello"></ListItemText>
+                <ListItemText primary={props.todo}></ListItemText>
             </ListItem>
         </div>
     )

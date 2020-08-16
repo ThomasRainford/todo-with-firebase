@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Theme } from '@material-ui/core'
+import { makeStyles, Theme, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) => ({
     TodoTitle: {
@@ -17,7 +17,9 @@ const TodoTitle: React.FC<Props> = (props: Props) => {
 
     return (
         <div className={classes.TodoTitle}>
-            <h3>{props.title}</h3>
+            <Typography variant="h5">
+                {props.title}
+            </Typography>
         </div>
     )
 }

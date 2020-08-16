@@ -7,7 +7,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     Todo: {
         flexGrow: 1,
         margin: 'auto',
-        width: '50%',
+        width: '60%',
+        paddingTop: '1%',
+        paddingBottom: '1%',
     },
 }));
 

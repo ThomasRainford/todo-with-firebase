@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles, Theme } from '@material-ui/core'
 import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
+import NewTodo from './NewTodo';
 
 const useStyles = makeStyles((theme: Theme) => ({
     Todo: {
@@ -29,6 +30,7 @@ const Todo: React.FC = () => {
         <div className={classes.Todo}>
             <TodoTitle title={todoTitle}/>
             <TodoList todos={todos}/>
+            <NewTodo setTodos={setTodos}/>
         </div>
     )
 }

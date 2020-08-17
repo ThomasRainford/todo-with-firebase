@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
-import TodoContainer from './components/Todo'
+import TodoContainer from './components/TodoContainer'
 
 const App: React.FC = () => {
   return (

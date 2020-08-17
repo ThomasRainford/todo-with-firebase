@@ -18,28 +18,35 @@ interface Todo {
     text: string
 }
 
-const TodoContainer: React.FC = () => {
+interface Todos {
+    title: string
+    todos: Todo[]
+}
+
+interface Props {
+    setTodoFolder: Function,
+    todosFolder: Todos[]
+    index: number
+}
+
+const TodoContainer: React.FC<Props> = ({ setTodoFolder, todosFolder, index }) => {
     const classes = useStyles()
 
-    const [todoTitle, setTodoTitle] = useState<string>('This is the Title')
-    const [todos, setTodos] = useState<Todo[]>([{
-        text: 'Todo 1'
-    }, {
-        text: 'Todo 2'
-    }, {
-        text: 'Todo 3'
-    }])
-
     const addTodo = (todo: Todo) => {
-        let todoss = [todo, ...todos]
-        setTodos(todoss)
+        let todos: Todo[] = [...todosFolder[index].todos]
+        const newTodos: Todo[] = [todo, ...todos]
+        
+        todos = newTodos
+        todosFolder[index].todos = [...todos]
+
+        setTodoFolder([...todosFolder])
     }
 
     return (
         <div className={classes.Todo}>
-            <TodoTitle title={todoTitle}/>
-            <NewTodo addTodo={addTodo}/>
-            <TodoList todos={todos}/>
+            <TodoTitle title={todosFolder[index].title} />
+            <NewTodo addTodo={addTodo} />
+            <TodoList todos={todosFolder[index].todos} />
         </div>
     )
 }

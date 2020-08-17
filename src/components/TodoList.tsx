@@ -24,7 +24,7 @@ const TodoList: React.FC<Props> = ({todos}) => {
             <List>
                 {todos &&
                     todos.map((todo: Todo) => (
-                        <TodoItem text={todo.text} />
+                        <TodoItem key={todo.text} text={todo.text} />
                     ))
                 }
             </List>

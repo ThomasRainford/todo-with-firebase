@@ -14,11 +14,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const Todo: React.FC = () => {
+interface Todo {
+    text: string
+}
+
+const TodoContainer: React.FC = () => {
     const classes = useStyles()
 
     const [todoTitle, setTodoTitle] = useState<string>('This is the Title')
-    const [todos, setTodos] = useState([{
+    const [todos, setTodos] = useState<Todo[]>([{
         text: 'Todo 1'
     }, {
         text: 'Todo 2'
@@ -30,9 +34,9 @@ const Todo: React.FC = () => {
         <div className={classes.Todo}>
             <TodoTitle title={todoTitle}/>
             <TodoList todos={todos}/>
-            <NewTodo setTodos={setTodos}/>
+            <NewTodo todos={todos} setTodos={setTodos}/>
         </div>
     )
 }
 
-export default Todo
+export default TodoContainer

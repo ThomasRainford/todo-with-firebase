@@ -1,6 +1,6 @@
 import React from 'react'
-import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form} from 'formik'
+import { makeStyles, Theme, TextField, Button } from '@material-ui/core';
+import { Formik, Form } from 'formik'
 
 const useStyles = makeStyles((theme: Theme) => ({
     NewTodoForm: {
@@ -8,12 +8,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const NewTodoFrom: React.FC = () => {
+interface Todo {
+    text: string
+}
+
+interface Props {
+    onSubmit: (values: Todo) => void
+}
+
+const NewTodoFrom: React.FC<Props> = (props: Props) => {
     const classes = useStyles()
 
     return (
         <div className={classes.NewTodoForm}>
-            
+            <Formik
+                initialValues={{ text: '' }}
+                onSubmit={(values) => {
+                    props.onSubmit(values)
+                }}>
+                {({values, handleChange}) => (
+                    <Form>
+                        <TextField placeholder="Add Todo" name="text" value={values.text} onChange={handleChange}/>
+                        <Button type="submit">Add</Button>
+                    </Form>
+                )}
+            </Formik>
         </div>
     )
 }

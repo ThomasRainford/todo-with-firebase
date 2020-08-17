@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { List, Theme, makeStyles } from '@material-ui/core'
 import TodoItem from './TodoItem'
 
@@ -8,8 +8,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }))
 
+interface Todo {
+    text: string
+}
+
 interface Props {
-    todos: any
+    todos: Todo[]
 }
 
 const TodoList: React.FC<Props> = ({todos}) => {
@@ -19,8 +23,8 @@ const TodoList: React.FC<Props> = ({todos}) => {
         <div className={classes.TodoList}>
             <List>
                 {todos &&
-                    todos.map((todo: any) => (
-                        <TodoItem todo={todo.text} />
+                    todos.map((todo: Todo) => (
+                        <TodoItem text={todo.text} />
                     ))
                 }
             </List>

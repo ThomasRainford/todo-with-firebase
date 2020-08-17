@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface Props {
-    todo: string
+    text: string
 }
 
 const TodoItem: React.FC<Props> = (props: Props) => {
@@ -21,7 +21,7 @@ const TodoItem: React.FC<Props> = (props: Props) => {
                 <ListItemIcon>
                     <ArrowForwardIosIcon fontSize="small" color="primary"/>
                 </ListItemIcon>
-                <ListItemText primary={props.todo}></ListItemText>
+                <ListItemText primary={props.text}></ListItemText>
             </ListItem>
             <Divider />
         </div>

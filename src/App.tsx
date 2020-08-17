@@ -1,13 +1,13 @@
 import React from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
-import Todo from './components/Todo'
+import TodoContainer from './components/Todo'
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
-      <Todo />
+      <TodoContainer />
     </div>
   )
 }

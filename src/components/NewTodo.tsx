@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     NewTodo: {
         flexGrow: 1,
         paddingTop: '1%',
+        paddingLeft: '1%'
     },
 }));
 
@@ -27,7 +28,7 @@ const NewTodo: React.FC<Props> = ({ addTodo }) => {
 
     return (
         <div className={classes.NewTodo}>
-            <AddIcon color="primary" onClick={doAddTodo} />
+            <AddIcon fontSize="large" color="primary" onClick={doAddTodo} />
             {displayInput &&
                 <NewTodoFrom onSubmit={(values) => {
                     addTodo(values)

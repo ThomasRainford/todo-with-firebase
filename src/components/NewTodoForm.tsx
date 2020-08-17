@@ -23,12 +23,13 @@ const NewTodoFrom: React.FC<Props> = (props: Props) => {
         <div className={classes.NewTodoForm}>
             <Formik
                 initialValues={{ text: '' }}
-                onSubmit={(values) => {
+                onSubmit={(values, { resetForm }) => {
                     props.onSubmit(values)
+                    resetForm()
                 }}>
-                {({values, handleChange}) => (
+                {({ values, handleChange }) => (
                     <Form>
-                        <TextField placeholder="Add Todo" name="text" value={values.text} onChange={handleChange}/>
+                        <TextField placeholder="Add Todo" name="text" value={values.text} onChange={handleChange} />
                         <Button type="submit">Add</Button>
                     </Form>
                 )}

@@ -31,15 +31,15 @@ const TodoContainer: React.FC = () => {
     }])
 
     const addTodo = (todo: Todo) => {
-        let todoss = [...todos, todo]
+        let todoss = [todo, ...todos]
         setTodos(todoss)
     }
 
     return (
         <div className={classes.Todo}>
             <TodoTitle title={todoTitle}/>
-            <TodoList todos={todos}/>
             <NewTodo addTodo={addTodo}/>
+            <TodoList todos={todos}/>
         </div>
     )
 }

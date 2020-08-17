@@ -13,7 +13,7 @@ interface Todo {
 }
 
 interface Props {
-    todos: Todo[]
+    todos: firebase.firestore.DocumentData[]
 }
 
 const TodoList: React.FC<Props> = ({todos}) => {
@@ -23,7 +23,7 @@ const TodoList: React.FC<Props> = ({todos}) => {
         <div className={classes.TodoList}>
             <List>
                 {todos &&
-                    todos.map((todo: Todo) => (
+                    todos.map((todo: firebase.firestore.DocumentData) => (
                         <TodoItem key={todo.text} text={todo.text} />
                     ))
                 }

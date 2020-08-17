@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
 import TodoContainer from './components/TodoContainer'
-import TodoList from './components/TodoList'
+import { db } from './firebase'
 
 interface Todo {
   text: string
@@ -15,23 +15,30 @@ interface Todos {
 
 const App: React.FC = () => {
 
-  const [todoFolder, setTodoFolder] = useState<Todos[]>([
-    {
-      title: 'Title 1',
-      todos: [{ text: 'Todo 1' }, { text: 'Todo 2' }]
-    },
-    {
-      title: 'Title 2',
-      todos: [{ text: 'Todo 1' }, { text: 'Todo 2' }]
-    }
-  ])
+  const [todosFolder, setTodosFolder] = useState<firebase.firestore.DocumentData[]>()
 
   const [index, setIndex] = useState<number>(0)
+
+  const pullTodos = () => {
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot((snapshot: any) => {
+      setTodosFolder(snapshot.docs.map((doc: any) => ({
+        id: doc.id,
+        todo: doc.data()
+      })))
+    })
+  }
+
+  useEffect(() => {
+    pullTodos()
+  }, [])
 
   return (
     <div className="App">
       <NavBar />
-      <TodoContainer setTodoFolder={setTodoFolder} todosFolder={todoFolder} index={index} />
+      {todosFolder &&
+        <TodoContainer setTodosFolder={setTodosFolder} todosFolder={todosFolder} index={index} />
+      }
+      
     </div>
   )
 }

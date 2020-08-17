@@ -9,16 +9,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    title: string
+    todo: firebase.firestore.DocumentData
 }
 
-const TodoTitle: React.FC<Props> = (props: Props) => {
+const TodoTitle: React.FC<Props> = ({ todo }) => {
     const classes = useStyles()
 
     return (
         <div className={classes.TodoTitle}>
             <Typography variant="h5">
-                {props.title}
+                {todo.title}
             </Typography>
         </div>
     )

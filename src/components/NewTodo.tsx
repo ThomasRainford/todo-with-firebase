@@ -15,28 +15,24 @@ interface Todo {
 }
 
 interface Props {
-    todos: Todo[],
-    setTodos: Function
+    addTodo: Function
 }
 
-const NewTodo: React.FC<Props> = (props: Props) => {
+const NewTodo: React.FC<Props> = ({ addTodo }) => {
     const classes = useStyles()
 
     const [displayInput, setDisplayInput] = useState<boolean>(false)
 
-    const addTodo = () => { setDisplayInput(true) }
+    const doAddTodo = () => { setDisplayInput(true) }
 
     return (
         <div className={classes.NewTodo}>
-            <AddIcon color="primary" onClick={addTodo}/>
+            <AddIcon color="primary" onClick={doAddTodo} />
             {displayInput &&
                 <NewTodoFrom onSubmit={(values) => {
-                    props.todos.push(values)
-                    props.setTodos(props.todos)
-                    console.log(props.todos)
-                }}/>
+                    addTodo(values)
+                }} />
             }
-            
         </div>
     )
 }

@@ -37,9 +37,9 @@ const TodoContainer: React.FC<Props> = ({ setTodosFolder: setTodoFolder, todosFo
         <div className={classes.Todo}>
             {todosFolder && 
                 <div>
-                    <TodoTitle todo={todosFolder[index]} />
+                    <TodoTitle todosFolder={todosFolder[index]} />
                     <NewTodo currentTodo={todosFolder[index]} />
-                    <TodoList todos={todosFolder} />
+                    <TodoList todosFolder={todosFolder[index]} />
                 </div>
             }
         </div>

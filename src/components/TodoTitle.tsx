@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles, Theme, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -9,16 +9,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    todo: firebase.firestore.DocumentData
+    todosFolder: firebase.firestore.DocumentData
 }
 
-const TodoTitle: React.FC<Props> = ({ todo }) => {
+const TodoTitle: React.FC<Props> = ({ todosFolder }) => {
     const classes = useStyles()
 
     return (
         <div className={classes.TodoTitle}>
             <Typography variant="h5">
-                {todo.title}
+                {todosFolder.todo.title}
             </Typography>
         </div>
     )

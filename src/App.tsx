@@ -20,8 +20,8 @@ const App: React.FC = () => {
   const [index, setIndex] = useState<number>(0)
 
   const pullTodos = () => {
-    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot((snapshot: any) => {
-      setTodosFolder(snapshot.docs.map((doc: any) => ({
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
+      setTodosFolder(snapshot.docs.map((doc) => ({
         id: doc.id,
         todo: doc.data()
       })))
@@ -38,7 +38,6 @@ const App: React.FC = () => {
       {todosFolder &&
         <TodoContainer setTodosFolder={setTodosFolder} todosFolder={todosFolder} index={index} />
       }
-      
     </div>
   )
 }

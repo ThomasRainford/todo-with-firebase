@@ -9,18 +9,18 @@ import firebase from 'firebase';
 const useStyles = makeStyles((theme: Theme) => ({
     NewTodo: {
         flexGrow: 1,
-        paddingTop: '1%',
-        paddingLeft: '1%'
     },
+    openAddTodo: {
+        display: 'inline'
+    },
+    addTodoInput: {
+        display: 'inline-flex',
+        width: '100%'
+    }
 }));
 
 interface Todo {
     text: string
-}
-
-interface Todos {
-    title: string,
-    todos: Todo[]
 }
 
 interface Props {
@@ -43,15 +43,19 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
 
     return (
         <div className={classes.NewTodo}>
-            {!displayInput ?
-                <Button><AddIcon fontSize="large" color="primary" onClick={doAddTodo} /></Button>
-                : <Button><RemoveIcon fontSize="large" color="primary" onClick={doNotAddTodo} /></Button>
-            }
-            {displayInput &&
-                <NewTodoFrom onSubmit={(values) => {
-                    handleTodoUpload(values)
-                }} />
-            }
+            <div className={classes.openAddTodo}>
+                {!displayInput ?
+                    <Button onClick={doAddTodo}><AddIcon fontSize="large" color="primary" /></Button>
+                    : <Button onClick={doNotAddTodo}><RemoveIcon fontSize="large" color="primary" /></Button>
+                }
+            </div>
+            <div className={classes.addTodoInput}>
+                {displayInput &&
+                    <NewTodoFrom onSubmit={(values) => {
+                        handleTodoUpload(values)
+                    }} />
+                }
+            </div>
         </div>
     )
 }

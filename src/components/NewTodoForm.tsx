@@ -4,7 +4,8 @@ import { Formik, Form } from 'formik'
 
 const useStyles = makeStyles((theme: Theme) => ({
     NewTodoForm: {
-        flexGrow: 1,
+        width: '100%',
+        display: 'inline',
     },
 }));
 
@@ -28,8 +29,8 @@ const NewTodoFrom: React.FC<Props> = (props: Props) => {
                     resetForm()
                 }}>
                 {({ values, handleChange }) => (
-                    <Form>
-                        <TextField placeholder="Add Todo" name="text" value={values.text} onChange={handleChange} />
+                    <Form >
+                        <TextField style={{width: '80%'}} placeholder="Add Todo" name="text" value={values.text} onChange={handleChange} />
                         <Button type="submit">Add</Button>
                     </Form>
                 )}

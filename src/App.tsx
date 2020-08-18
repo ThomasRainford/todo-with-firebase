@@ -4,15 +4,6 @@ import NavBar from './components/NavBar'
 import TodoContainer from './components/TodoContainer'
 import { db } from './firebase'
 
-interface Todo {
-  text: string
-}
-
-interface Todos {
-  title: string
-  todos: Todo[]
-}
-
 const App: React.FC = () => {
 
   const [todosFolder, setTodosFolder] = useState<firebase.firestore.DocumentData[]>()

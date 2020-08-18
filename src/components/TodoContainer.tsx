@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles, Theme } from '@material-ui/core'
 import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';
+import { db } from '../firebase';
 
 const useStyles = makeStyles((theme: Theme) => ({
     Todo: {
@@ -18,28 +19,29 @@ interface Todo {
     text: string
 }
 
-const TodoContainer: React.FC = () => {
+interface Todos {
+    title: string
+    todos: Todo[]
+}
+
+interface Props {
+    setTodosFolder: Function,
+    todosFolder: firebase.firestore.DocumentData[] | undefined
+    index: number
+}
+
+const TodoContainer: React.FC<Props> = ({ setTodosFolder: setTodoFolder, todosFolder, index }) => {
     const classes = useStyles()
-
-    const [todoTitle, setTodoTitle] = useState<string>('This is the Title')
-    const [todos, setTodos] = useState<Todo[]>([{
-        text: 'Todo 1'
-    }, {
-        text: 'Todo 2'
-    }, {
-        text: 'Todo 3'
-    }])
-
-    const addTodo = (todo: Todo) => {
-        let todoss = [todo, ...todos]
-        setTodos(todoss)
-    }
 
     return (
         <div className={classes.Todo}>
-            <TodoTitle title={todoTitle}/>
-            <NewTodo addTodo={addTodo}/>
-            <TodoList todos={todos}/>
+            {todosFolder && 
+                <div>
+                    <TodoTitle todosFolder={todosFolder[index]} />
+                    <NewTodo currentTodo={todosFolder[index]} />
+                    <TodoList todosFolder={todosFolder[index]} />
+                </div>
+            }
         </div>
     )
 }

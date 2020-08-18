@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface Props {
-    text: string
+    text: firebase.firestore.DocumentData
 }
 
-const TodoItem: React.FC<Props> = (props: Props) => {
+const TodoItem: React.FC<Props> = ({ text }) => {
     const classes = useStyles()
 
     return (
@@ -21,7 +21,7 @@ const TodoItem: React.FC<Props> = (props: Props) => {
                 <ListItemIcon>
                     <ArrowForwardIosIcon fontSize="small" color="primary"/>
                 </ListItemIcon>
-                <ListItemText primary={props.text}></ListItemText>
+                <ListItemText primary={text}></ListItemText>
             </ListItem>
             <Divider />
         </div>

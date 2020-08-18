@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core'
 import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';
-import { db } from '../firebase';
+
 
 const useStyles = makeStyles((theme: Theme) => ({
     Todo: {
@@ -35,7 +35,7 @@ const TodoContainer: React.FC<Props> = ({ setTodosFolder: setTodoFolder, todosFo
 
     return (
         <div className={classes.Todo}>
-            {todosFolder && 
+            {todosFolder &&
                 <div>
                     <TodoTitle todosFolder={todosFolder[index]} />
                     <NewTodo currentTodo={todosFolder[index]} />

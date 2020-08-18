@@ -19,7 +19,7 @@ const TodoItem: React.FC<Props> = ({ text }) => {
         <div className={classes.TodoItem}>
             <ListItem>
                 <ListItemIcon>
-                    <ArrowForwardIosIcon fontSize="small" color="primary"/>
+                    <ArrowForwardIosIcon fontSize="small" color="primary" />
                 </ListItemIcon>
                 <ListItemText primary={text}></ListItemText>
             </ListItem>

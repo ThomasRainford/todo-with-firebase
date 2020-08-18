@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { List, Theme, makeStyles } from '@material-ui/core'
 import TodoItem from './TodoItem'
 
@@ -8,20 +8,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }))
 
-interface Todo {
-    text: string
-}
-
 interface Props {
     todosFolder: firebase.firestore.DocumentData
 }
 
 const TodoList: React.FC<Props> = ({ todosFolder }) => {
     const classes = useStyles()
-
-    useEffect(() => {
-        console.log(todosFolder)
-    }, [])
 
     return (
         <div className={classes.TodoList}>

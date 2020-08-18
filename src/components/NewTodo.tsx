@@ -36,9 +36,9 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
     const doNotAddTodo = () => { setDisplayInput(false) }
 
     const handleTodoUpload = (values: Todo) => {
-        db.collection('todos').doc(currentTodo.id).update( {
+        db.collection('todos').doc(currentTodo.id).update({
             todos: firebase.firestore.FieldValue.arrayUnion(values.text)
-         });
+        });
     }
 
     return (
@@ -47,7 +47,6 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
                 <Button><AddIcon fontSize="large" color="primary" onClick={doAddTodo} /></Button>
                 : <Button><RemoveIcon fontSize="large" color="primary" onClick={doNotAddTodo} /></Button>
             }
-            
             {displayInput &&
                 <NewTodoFrom onSubmit={(values) => {
                     handleTodoUpload(values)

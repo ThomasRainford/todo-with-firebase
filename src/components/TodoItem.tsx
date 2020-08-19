@@ -1,15 +1,27 @@
-import React from 'react'
-import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, Button } from '@material-ui/core'
+import React, { useState } from 'react'
+import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, Button, IconButton, Icon } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import firebase from 'firebase';
 import { db } from '../firebase';
+import NewTodoFrom from './NewTodoForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
     TodoItem: {
         flexGrow: 1,
     },
+    editIcon: {
+        paddingRight: '2%'
+    },
+    removeIcon: {
+        paddingLeft: '2%'
+    },
 }))
+
+interface Todo {
+    text: string
+}
 
 interface Props {
     text: firebase.firestore.DocumentData
@@ -19,9 +31,21 @@ interface Props {
 const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
     const classes = useStyles()
 
+    const [isEditing, setIsEditing] = useState<boolean>(false)
+
+    const handleEdit = () => {
+        setIsEditing(true)
+    }
+
     const handleRemove = () => {
         db.collection('todos').doc(currentTodo.id).update({
             todos: firebase.firestore.FieldValue.arrayRemove(text)
+        });
+    }
+
+    const handleTodoUpload = (values: Todo) => {
+        db.collection('todos').doc(currentTodo.id).update({
+            todos: firebase.firestore.FieldValue.arrayUnion(values.text)
         });
     }
 
@@ -31,10 +55,21 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
                 <ListItemIcon>
                     <ArrowForwardIosIcon fontSize="small" color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={text}></ListItemText>
-                <ListItemIcon>
-                    <Button size="small" onClick={handleRemove}><DeleteIcon fontSize="small" color="error" /></Button>
-                </ListItemIcon>
+
+                {!isEditing ? <ListItemText primary={text}></ListItemText>
+                    : false === false //TODO: create component for editing todo.
+                }
+
+                <div className={classes.editIcon} >
+                    <IconButton size="small" onClick={handleEdit}>
+                        <EditIcon fontSize="small" color="primary" />
+                    </IconButton>
+                </div>
+                <div className={classes.removeIcon}>
+                    <IconButton size="small" onClick={handleRemove} >
+                        <DeleteIcon fontSize="small" color="error" />
+                    </IconButton>
+                </div>
             </ListItem>
             <Divider />
         </div>

@@ -14,7 +14,7 @@ interface Todo {
 }
 
 interface Props {
-    onSubmit: (values: Todo) => void
+    onSubmit: (values: Todo) => void,
 }
 
 const NewTodoFrom: React.FC<Props> = (props: Props) => {

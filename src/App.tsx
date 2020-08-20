@@ -5,22 +5,21 @@ import TodoContainer from './components/TodoContainer'
 import { db } from './firebase'
 
 const App: React.FC = () => {
-
   const [todosFolder, setTodosFolder] = useState<firebase.firestore.DocumentData[]>()
   const [index, setIndex] = useState<number>(0)
 
+  useEffect(() => {
+    pullTodos()
+  }, [])
+
   const pullTodos = () => {
-    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
+    db.collection('todos').onSnapshot((snapshot) => {
       setTodosFolder(snapshot.docs.map((doc) => ({
         id: doc.id,
         todo: doc.data()
       })))
     })
   }
-
-  useEffect(() => {
-    pullTodos()
-  }, [])
 
   return (
     <div className="App">

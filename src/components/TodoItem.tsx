@@ -45,10 +45,15 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
     }
 
     const handleTodoEdit = (values: Todo) => {
-        console.log(values)
-
+        const newTodosArray = [...currentTodo.todo.todos, values.text].filter((item) => {
+            return item !== text
+        })
         
-        setIsEditing(false)
+        db.collection('todos').doc(currentTodo.id).update({
+            todos: newTodosArray
+        }).then(() => {
+            setIsEditing(false)
+        });
     }
 
     return (

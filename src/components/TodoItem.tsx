@@ -65,7 +65,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
                 </ListItemIcon>
 
                 {!isEditing ? <ListItemText primary={text}></ListItemText>
-                    : <EditTodoForm onSubmit={handleTodoEdit} />
+                    : <EditTodoForm todoText={text.toString()} onSubmit={handleTodoEdit} />
                 }
 
                 <div className={classes.editIcon} >

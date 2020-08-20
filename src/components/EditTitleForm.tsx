@@ -3,9 +3,9 @@ import { makeStyles, Theme, TextField, Button } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 
 const useStyles = makeStyles((theme: Theme) => ({
-    EditTodoForm: {
-        flexGrow: 1,
-    },
+    EditTitleForm: {
+
+    }
 }))
 
 interface Todo {
@@ -14,23 +14,22 @@ interface Todo {
 
 interface Props {
     onSubmit: (values: Todo) => void
-    todoText: string
+    todoTitle: string
 }
 
-const EditTodoForm: React.FC<Props> = (props: Props) => {
+const EditTitleForm: React.FC<Props> = (props: Props) => {
     const classes = useStyles()
 
     return (
-        <div className={classes.EditTodoForm}>
-            <Formik initialValues={{ text: props.todoText }}
+        <div className={classes.EditTitleForm}>
+            <Formik initialValues={{ text: props.todoTitle }}
                 onSubmit={(values) => {
                     props.onSubmit(values)
                 }}>
                 {({ values, handleChange }) => (
                     <Form>
-                        <TextField style={{ width: '75%' }}
-                            onChange={handleChange} name="text" value={values.text} />
-                        <Button style={{ marginLeft: '3%', marginRight: '3%', float: 'right' }}
+                        <TextField style={{}} onChange={handleChange} name="text" value={values.text} />
+                        <Button style={{ marginLeft: '3%', marginRight: '3%' }}
                             variant="outlined" color="primary" size="small" type="submit">Edit</Button>
                     </Form>
                 )}
@@ -39,4 +38,4 @@ const EditTodoForm: React.FC<Props> = (props: Props) => {
     )
 }
 
-export default EditTodoForm
+export default EditTitleForm

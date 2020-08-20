@@ -20,7 +20,7 @@ const TodoList: React.FC<Props> = ({ todosFolder }) => {
             <List>
                 {todosFolder &&
                     todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => (
-                        <TodoItem key={Math.random()} text={todo} currentTodo={todosFolder} />
+                        <TodoItem key={Math.random()} text={todo} currentTodo={todosFolder} index={todosFolder.todo.todos.indexOf(todo)} />
                     ))
                 }
             </List>

@@ -14,6 +14,7 @@ interface Todo {
 
 interface Props {
     onSubmit: (values: Todo) => void
+    todoText: string
 }
 
 const EditTodoForm: React.FC<Props> = (props: Props) => {
@@ -21,8 +22,8 @@ const EditTodoForm: React.FC<Props> = (props: Props) => {
 
     return (
         <div className={classes.EditTodoForm}>
-            <Formik initialValues={{ text: '' }}
-                onSubmit={(values, { resetForm }) => {
+            <Formik initialValues={{ text: props.todoText }}
+                onSubmit={(values) => {
                     props.onSubmit(values)
                 }}>
                 {({ values, handleChange }) => (
@@ -33,7 +34,6 @@ const EditTodoForm: React.FC<Props> = (props: Props) => {
                             variant="outlined" color="primary" size="small" type="submit">Edit</Button>
                     </Form>
                 )}
-
             </Formik>
         </div>
     )

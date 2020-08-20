@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, Button, IconButton, Icon } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, IconButton } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import firebase from 'firebase';
 import { db } from '../firebase';
-import NewTodoFrom from './NewTodoForm';
 import EditTodoForm from './EditTodoForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -26,13 +25,18 @@ interface Todo {
 
 interface Props {
     text: firebase.firestore.DocumentData
-    currentTodo: firebase.firestore.DocumentData
+    currentTodo: firebase.firestore.DocumentData,
+    index: number
 }
 
-const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
+const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     const classes = useStyles()
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
+
+    useEffect(() => {
+        setIsEditing(false) // when todo is edited, this will be called.
+    }, [])
 
     const handleEdit = () => {
         setIsEditing(!isEditing)
@@ -45,15 +49,12 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
     }
 
     const handleTodoEdit = (values: Todo) => {
-        const newTodosArray = [...currentTodo.todo.todos, values.text].filter((item) => {
-            return item !== text
-        })
+        const newTodosArray = currentTodo.todo.todos
+        newTodosArray[index] = values.text
         
         db.collection('todos').doc(currentTodo.id).update({
             todos: newTodosArray
-        }).then(() => {
-            setIsEditing(false)
-        });
+        })
     }
 
     return (

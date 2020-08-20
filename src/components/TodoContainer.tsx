@@ -14,10 +14,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-interface Todo {
-    text: string
-}
-
 interface Props {
     setTodosFolder: Function,
     todosFolder: firebase.firestore.DocumentData[]

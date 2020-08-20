@@ -51,7 +51,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     const handleTodoEdit = (values: Todo) => {
         const newTodosArray = currentTodo.todo.todos
         newTodosArray[index] = values.text
-        
+
         db.collection('todos').doc(currentTodo.id).update({
             todos: newTodosArray
         })
@@ -65,7 +65,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
                 </ListItemIcon>
 
                 {!isEditing ? <ListItemText primary={text}></ListItemText>
-                    : <EditTodoForm onSubmit={handleTodoEdit}/>
+                    : <EditTodoForm onSubmit={handleTodoEdit} />
                 }
 
                 <div className={classes.editIcon} >

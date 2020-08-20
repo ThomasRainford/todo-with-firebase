@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import firebase from 'firebase';
 import { db } from '../firebase';
 import NewTodoFrom from './NewTodoForm';
+import EditTodoForm from './EditTodoForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
     TodoItem: {
@@ -34,7 +35,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
     const [isEditing, setIsEditing] = useState<boolean>(false)
 
     const handleEdit = () => {
-        setIsEditing(true)
+        setIsEditing(!isEditing)
     }
 
     const handleRemove = () => {
@@ -43,10 +44,11 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
         });
     }
 
-    const handleTodoUpload = (values: Todo) => {
-        db.collection('todos').doc(currentTodo.id).update({
-            todos: firebase.firestore.FieldValue.arrayUnion(values.text)
-        });
+    const handleTodoEdit = (values: Todo) => {
+        console.log(values)
+
+        
+        setIsEditing(false)
     }
 
     return (
@@ -57,7 +59,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo }) => {
                 </ListItemIcon>
 
                 {!isEditing ? <ListItemText primary={text}></ListItemText>
-                    : false === false //TODO: create component for editing todo.
+                    : <EditTodoForm onSubmit={handleTodoEdit}/>
                 }
 
                 <div className={classes.editIcon} >

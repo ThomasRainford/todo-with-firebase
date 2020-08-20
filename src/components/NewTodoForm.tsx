@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles, Theme, TextField, Button } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 import { Formik, Form } from 'formik'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,7 +32,7 @@ const NewTodoFrom: React.FC<Props> = (props: Props) => {
                 {({ values, handleChange }) => (
                     <Form >
                         <TextField style={{width: '80%'}} placeholder="Add Todo" name="text" value={values.text} onChange={handleChange} />
-                        <Button type="submit">Add</Button>
+                        <Button size="small" startIcon={<SaveIcon/>} style={{marginLeft: '3%'}} variant="outlined" color="primary" type="submit">Add</Button>
                     </Form>
                 )}
             </Formik>

@@ -4,7 +4,6 @@ import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';
 
-
 const useStyles = makeStyles((theme: Theme) => ({
     Todo: {
         flexGrow: 1,
@@ -19,14 +18,9 @@ interface Todo {
     text: string
 }
 
-interface Todos {
-    title: string
-    todos: Todo[]
-}
-
 interface Props {
     setTodosFolder: Function,
-    todosFolder: firebase.firestore.DocumentData[] | undefined
+    todosFolder: firebase.firestore.DocumentData[]
     index: number
 }
 

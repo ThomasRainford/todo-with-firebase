@@ -30,7 +30,7 @@ const EditTodoForm: React.FC<Props> = (props: Props) => {
                     <Form>
                         <TextField style={{ width: '75%' }}
                             onChange={handleChange} name="text" value={values.text} />
-                        <Button style={{ marginLeft: '3%', marginRight: '3%', float: 'right' }}
+                        <Button style={{ marginLeft: '3%', marginRight: '3%' }}
                             variant="outlined" color="primary" size="small" type="submit">Edit</Button>
                     </Form>
                 )}

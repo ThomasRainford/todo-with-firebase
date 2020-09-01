@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, IconButton } from '@material-ui/core'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, IconButton, Checkbox } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import firebase from 'firebase';
@@ -10,6 +9,7 @@ import EditTodoForm from './EditTodoForm';
 const useStyles = makeStyles((theme: Theme) => ({
     TodoItem: {
         flexGrow: 1,
+        //backgroundColor: '#CBB9B6',
     },
     editIcon: {
         paddingRight: '2%'
@@ -33,10 +33,23 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     const classes = useStyles()
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
+    const [isChecked, setIsChecked] = useState<boolean>(false)
 
     useEffect(() => {
         setIsEditing(false) // when todo is edited, this will be called.
     }, [])
+
+    const handleCheckbox = () => {
+        setIsChecked(!isChecked)
+    }
+
+    const setTodoText = () => {
+        if(isChecked) {
+            return <ListItemText primary={<s>{text}</s>}/>
+        } else {
+            return <ListItemText primary={text} />
+        }                                                                               
+    } 
 
     const handleEdit = () => {
         setIsEditing(!isEditing)
@@ -60,11 +73,14 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     return (
         <div className={classes.TodoItem}>
             <ListItem>
-                <ListItemIcon>
-                    <ArrowForwardIosIcon fontSize="small" color="primary" />
-                </ListItemIcon>
+                <Checkbox
+                    style={{marginRight: '1%'}}
+                    checked={isChecked}
+                    onChange={handleCheckbox}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
 
-                {!isEditing ? <ListItemText primary={text}></ListItemText>
+                {!isEditing ? setTodoText()
                     : <EditTodoForm todoText={text.toString()} onSubmit={handleTodoEdit} />
                 }
 

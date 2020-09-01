@@ -6,7 +6,7 @@ import { db } from './firebase'
 
 const App: React.FC = () => {
   const [todosFolder, setTodosFolder] = useState<firebase.firestore.DocumentData[]>()
-  const [index, setIndex] = useState<number>(0)
+  const [index, setIndex] = useState<number>(1)
 
   useEffect(() => {
     pullTodos()

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { makeStyles, Theme, Button } from '@material-ui/core'
+import { makeStyles, Theme, Button, Fab } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import NewTodoFrom from './NewTodoForm';
@@ -45,8 +45,8 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
         <div className={classes.NewTodo}>
             <div className={classes.openAddTodo}>
                 {!displayInput ?
-                    <Button onClick={doAddTodo}><AddIcon fontSize="large" color="primary" /></Button>
-                    : <Button onClick={doNotAddTodo}><RemoveIcon fontSize="large" color="primary" /></Button>
+                    <Fab onClick={doAddTodo} variant="extended"><AddIcon fontSize="large" color="primary" />Add Todo</Fab>
+                    : <Fab onClick={doNotAddTodo} variant="extended"><RemoveIcon fontSize="large" color="primary" />Close</Fab>
                 }
             </div>
             <div className={classes.addTodoInput}>

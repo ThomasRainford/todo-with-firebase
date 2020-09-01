@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { ListItem, ListItemText, makeStyles, Theme, Divider, ListItemIcon, IconButton, Checkbox } from '@material-ui/core'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import firebase from 'firebase';

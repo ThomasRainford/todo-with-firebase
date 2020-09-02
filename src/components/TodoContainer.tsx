@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Theme, Card, CardHeader, CardContent } from '@material-ui/core'
+import { makeStyles, Theme, Card, CardContent } from '@material-ui/core'
 import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';

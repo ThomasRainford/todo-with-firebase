@@ -16,7 +16,6 @@ const TodoList: React.FC<Props> = ({ todosFolder }) => {
     const classes = useStyles()
 
     return (
-        //<div className={classes.TodoList}>
         <Card>
             <CardContent>
                 <List>
@@ -28,7 +27,6 @@ const TodoList: React.FC<Props> = ({ todosFolder }) => {
                 </List>
             </CardContent>
         </Card>
-        // {/* </div> */}
     )
 }
 

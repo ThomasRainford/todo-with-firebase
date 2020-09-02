@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import firebase from 'firebase';
 import { db } from '../firebase';
 import useFirebaseFirestoreEdit from '../hooks/useFirebaseFirestoreEdit'
+import useFirebaseFirestoreRemove from '../hooks/useFirebaseFirestoreRemove'
 import EditTodoForm from './EditTodoForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,7 +37,8 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [isChecked, setIsChecked] = useState<boolean>(false)
 
-    const [ editTodos ] = useFirebaseFirestoreEdit(currentTodo, index)
+    const [editTodos] = useFirebaseFirestoreEdit(currentTodo, index)
+    const [removeTodo] = useFirebaseFirestoreRemove(currentTodo, text)
 
     useEffect(() => {
         setIsEditing(false) // when todo is edited, this will be called.
@@ -47,28 +49,22 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     }
 
     const setTodoText = () => {
-        if(isChecked) {
-            return <ListItemText primary={<s>{text}</s>}/>
+        if (isChecked) {
+            return <ListItemText primary={<s>{text}</s>} />
         } else {
             return <ListItemText primary={text} />
-        }                                                                               
-    } 
+        }
+    }
 
     const handleEdit = () => {
         setIsEditing(!isEditing)
     }
-
-    const handleRemove = () => {
-        db.collection('todos').doc(currentTodo.id).update({
-            todos: firebase.firestore.FieldValue.arrayRemove(text)
-        });
-    }
-
+    
     return (
         <div className={classes.TodoItem}>
             <ListItem>
                 <Checkbox
-                    style={{marginRight: '1%'}}
+                    style={{ marginRight: '1%' }}
                     checked={isChecked}
                     onChange={handleCheckbox}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
@@ -84,7 +80,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
                     </IconButton>
                 </div>
                 <div className={classes.removeIcon}>
-                    <IconButton size="small" onClick={handleRemove} >
+                    <IconButton size="small" onClick={() => removeTodo()} >
                         <DeleteIcon fontSize="small" color="error" />
                     </IconButton>
                 </div>

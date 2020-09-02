@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Theme } from '@material-ui/core'
+import { makeStyles, Theme, Card, CardHeader, CardContent } from '@material-ui/core'
 import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';
@@ -19,16 +19,20 @@ interface Props {
     index: number
 }
 
-const TodoContainer: React.FC<Props> = ({  allTodos: todosFolder, index }) => {
+const TodoContainer: React.FC<Props> = ({ allTodos: todosFolder, index }) => {
     const classes = useStyles()
 
     return (
         <div className={classes.Todo}>
             {todosFolder &&
                 <div>
-                    <TodoTitle todosFolder={todosFolder[index]} />
-                    <NewTodo currentTodo={todosFolder[index]} />
-                    <TodoList todosFolder={todosFolder[index]} />
+                    <Card style={{backgroundColor: '#ECF0F1'}}>
+                        <CardContent>
+                            <TodoTitle todosFolder={todosFolder[index]} />
+                            <NewTodo currentTodo={todosFolder[index]} />
+                            <TodoList todosFolder={todosFolder[index]} />
+                        </CardContent>
+                    </Card>
                 </div>
             }
         </div>

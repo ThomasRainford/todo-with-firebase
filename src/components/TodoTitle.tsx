@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     TodoTitle: {
         flexGrow: 1,
         textAlign: 'center',
+        marginTop: '2%',
+        marginBottom: '4%',
     },
 }));
 
@@ -38,7 +40,7 @@ const TodoTitle: React.FC<Props> = ({ todosFolder }) => {
     return (
         <div className={classes.TodoTitle}>
             {!isEditing ?
-                <Typography variant="h5" color="inherit" display="inline" onClick={handleEdit}>
+                <Typography variant="h4" color="inherit" display="inline" onClick={handleEdit}>
                     {todosFolder.todo.title}
                 </Typography>
                 : <EditTitleForm todoTitle={todosFolder.todo.title} onSubmit={handleTitileEdit}/>

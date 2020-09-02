@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles, Theme, Typography, Icon } from '@material-ui/core'
+import React, { useState } from 'react'
+import { makeStyles, Theme, Typography } from '@material-ui/core'
 import EditTitleForm from './EditTitleForm';
 import { db } from '../firebase';
 

@@ -15,12 +15,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    setTodosFolder: Function,
-    todosFolder: firebase.firestore.DocumentData[]
+    allTodos: firebase.firestore.DocumentData[] | undefined
     index: number
 }
 
-const TodoContainer: React.FC<Props> = ({ setTodosFolder: setTodoFolder, todosFolder, index }) => {
+const TodoContainer: React.FC<Props> = ({  allTodos: todosFolder, index }) => {
     const classes = useStyles()
 
     return (

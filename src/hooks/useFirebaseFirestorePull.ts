@@ -12,12 +12,12 @@ const FirebaseDatabaseAPI = (): [
 
     const pullTodos = () => {
         db.collection('todos').onSnapshot((snapshot) => {
-          setAllTodos(snapshot.docs.map((doc) => ({
-            id: doc.id,
-            todo: doc.data()
-          })))
+            setAllTodos(snapshot.docs.map((doc) => ({
+                id: doc.id,
+                todo: doc.data()
+            })))
         })
-      }
+    }
 
     return [
         { allTodos },

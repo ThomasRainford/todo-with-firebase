@@ -1,27 +1,22 @@
 import { useState } from 'react'
 import { db, firebase } from '../firebase'
 
-const FirebaseDatabaseAPI = (): [
-    {
-        allTodos: firebase.firestore.DocumentData[] | undefined
-    },
+interface Todo {
+    text: string
+}
+
+const FirebaseDatabaseAPI = (currentTodo: firebase.firestore.DocumentData): [
     Function
 ] => {
 
-    const [allTodos, setAllTodos] = useState<firebase.firestore.DocumentData[]>()
-
-    const pullTodos = () => {
-        db.collection('todos').onSnapshot((snapshot) => {
-          setAllTodos(snapshot.docs.map((doc) => ({
-            id: doc.id,
-            todo: doc.data()
-          })))
-        })
-      }
+    const pushTodos = (values: Todo) => {
+        db.collection('todos').doc(currentTodo.id).update({
+            todos: firebase.firestore.FieldValue.arrayUnion(values.text)
+        });
+    }
 
     return [
-        { allTodos },
-        pullTodos
+        pushTodos
     ]
 }
 

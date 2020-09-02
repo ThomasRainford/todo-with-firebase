@@ -5,6 +5,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import NewTodoFrom from './NewTodoForm';
 import { db } from '../firebase';
 import firebase from 'firebase';
+import useFirebaseFirestorePush from '../hooks/useFirebaseFirestorePush'
 
 const useStyles = makeStyles((theme: Theme) => ({
     NewTodo: {
@@ -35,11 +36,13 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
     const doAddTodo = () => { setDisplayInput(true) }
     const doNotAddTodo = () => { setDisplayInput(false) }
 
-    const handleTodoUpload = (values: Todo) => {
-        db.collection('todos').doc(currentTodo.id).update({
-            todos: firebase.firestore.FieldValue.arrayUnion(values.text)
-        });
-    }
+    const [ pushTodos ] = useFirebaseFirestorePush(currentTodo)
+
+    // const handleTodoUpload = (values: Todo) => {
+    //     db.collection('todos').doc(currentTodo.id).update({
+    //         todos: firebase.firestore.FieldValue.arrayUnion(values.text)
+    //     });
+    // }
 
     return (
         <div className={classes.NewTodo}>
@@ -52,7 +55,7 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
             <div className={classes.addTodoInput}>
                 {displayInput &&
                     <NewTodoFrom onSubmit={(values) => {
-                        handleTodoUpload(values)
+                        pushTodos(values)
                     }} />
                 }
             </div>

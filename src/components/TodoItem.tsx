@@ -36,7 +36,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [isChecked, setIsChecked] = useState<boolean>(false)
 
-    const [editTodos] = useFirebaseFirestoreEdit(currentTodo, index)
+    const [editTodos, getCompleted] = useFirebaseFirestoreEdit(currentTodo, index)
     const [removeTodo] = useFirebaseFirestoreRemove(currentTodo, text)
 
     useEffect(() => {
@@ -45,6 +45,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
 
     const handleCheckbox = () => {
         setIsChecked(!isChecked)
+        getCompleted()
     }
 
     const setTodoText = () => {

@@ -1,24 +1,36 @@
 import { db, firebase } from '../firebase'
+import { useState } from 'react'
 
 interface Todo {
     text: string
 }
 
-const FirebaseDatabaseAPI = (currentTodo: firebase.firestore.DocumentData, index: number): [
-    (values: Todo) => void
+const FirebaseDatabaseAPI = (currentTodos: firebase.firestore.DocumentData, index: number): [
+    (values: Todo) => void,
+    () => void,
 ] => {
 
     const editTodo = (values: Todo) => {
-        const newTodosArray = currentTodo.todo.todos
+        const newTodosArray = currentTodos.todo.todos
         newTodosArray[index] = values.text
 
-        db.collection('todos').doc(currentTodo.id).update({
+        db.collection('todos').doc(currentTodos.id).update({
             todos: newTodosArray
         })
     }
 
+    const editCompleted = () => {
+        const newCompletedArray: boolean[] = currentTodos.todo.completed
+        newCompletedArray[index] = !currentTodos.todo.completed[index]
+
+        db.collection('todos').doc(currentTodos.id).update({
+            completed: newCompletedArray
+        })
+    }
+
     return [
-        editTodo
+        editTodo,
+        editCompleted,
     ]
 }
 

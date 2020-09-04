@@ -26,25 +26,29 @@ interface Todo {
 
 interface Props {
     text: firebase.firestore.DocumentData
-    currentTodo: firebase.firestore.DocumentData,
+    currentTodos: firebase.firestore.DocumentData,
     index: number
 }
 
-const TodoItem: React.FC<Props> = ({ text, currentTodo, index }) => {
+const TodoItem: React.FC<Props> = ({ text, currentTodos, index }) => {
     const classes = useStyles()
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [isChecked, setIsChecked] = useState<boolean>(false)
-
-    const [editTodos] = useFirebaseFirestoreEdit(currentTodo, index)
-    const [removeTodo] = useFirebaseFirestoreRemove(currentTodo, text)
+    const [removeTodo] = useFirebaseFirestoreRemove(currentTodos, text)
+    const [editTodos, editCompleted] = useFirebaseFirestoreEdit(currentTodos, index)
 
     useEffect(() => {
         setIsEditing(false) // when todo is edited, this will be called.
     }, [])
 
+    useEffect(() => {
+        setIsChecked(currentTodos.todo.completed[index])
+    }, [currentTodos])
+
     const handleCheckbox = () => {
-        setIsChecked(!isChecked)
+        editCompleted()
+        
     }
 
     const setTodoText = () => {

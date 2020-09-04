@@ -4,14 +4,18 @@ interface Todo {
     text: string
 }
 
-const FirebaseDatabaseAPI = (currentTodo: firebase.firestore.DocumentData): [
+const FirebaseDatabaseAPI = (currentTodos: firebase.firestore.DocumentData): [
     Function
 ] => {
 
     const pushTodos = (values: Todo) => {
-        db.collection('todos').doc(currentTodo.id).update({
+        db.collection('todos').doc(currentTodos.id).update({
             todos: firebase.firestore.FieldValue.arrayUnion(values.text)
-        });
+        })
+
+        db.collection('todos').doc(currentTodos.id).update({
+            completed: firebase.firestore.FieldValue.arrayUnion(false)
+        })
     }
 
     return [

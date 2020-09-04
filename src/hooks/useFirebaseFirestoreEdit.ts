@@ -5,35 +5,32 @@ interface Todo {
     text: string
 }
 
-const FirebaseDatabaseAPI = (currentTodo: firebase.firestore.DocumentData, index: number): [
+const FirebaseDatabaseAPI = (currentTodos: firebase.firestore.DocumentData, index: number): [
     (values: Todo) => void,
-    () => boolean[]
+    () => void,
 ] => {
 
-
     const editTodo = (values: Todo) => {
-        const newTodosArray = currentTodo.todo.todos
+        const newTodosArray = currentTodos.todo.todos
         newTodosArray[index] = values.text
 
-        db.collection('todos').doc(currentTodo.id).update({
+        db.collection('todos').doc(currentTodos.id).update({
             todos: newTodosArray
         })
     }
 
-    const getCompleted = (): boolean[] => {
-        const completed: boolean[] = []
-        db.collection('todos').onSnapshot((snapshot) => {
-            snapshot.docs.map((doc) => {
-                completed.push(doc.data().completed)
-                console.log(doc.data().completed)
-            })
+    const editCompleted = () => {
+        const newCompletedArray: boolean[] = currentTodos.todo.completed
+        newCompletedArray[index] = !currentTodos.todo.completed[index]
+
+        db.collection('todos').doc(currentTodos.id).update({
+            completed: newCompletedArray
         })
-        return completed
     }
 
     return [
         editTodo,
-        getCompleted
+        editCompleted,
     ]
 }
 

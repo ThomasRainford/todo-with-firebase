@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles, Theme, Button, List } from '@material-ui/core'
 import TodoItem from './TodoItem'
 
@@ -29,26 +29,30 @@ const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
     }
 
     const activeTodos = (): firebase.firestore.DocumentData[] => {
-        return todosFolder.todo.completed.filter((completed: firebase.firestore.DocumentData) => {
-            return completed
+        let index: number = 0
+        return todosFolder.todo.todos.filter(() => {
+            return !todosFolder.todo.completed[index++]
         })
     }
 
     const completedTodos = (): firebase.firestore.DocumentData[] => {
-        return todosFolder.todo.completed.filter((completed: firebase.firestore.DocumentData) => {
-            return !completed
+        let index: number = 0
+        return todosFolder.todo.todos.filter(() => {
+            return todosFolder.todo.completed[index++]
         })
     }
 
+    const [filteredTodos, setFilteredTodos] = useState<firebase.firestore.DocumentData[]>(allTodos())
+
     return (
         <div className={classes.TodoFilters}>
-            <Button className={classes.allButton} variant="contained" color="primary">All</Button>
-            <Button className={classes.activeButton} variant="contained" color="primary">Active</Button>
-            <Button className={classes.completedButton} variant="contained" color="primary">Completed</Button>
+            <Button onClick={() => { setFilteredTodos(allTodos()) }} className={classes.allButton} variant="contained" color="primary">All</Button>
+            <Button onClick={() => { setFilteredTodos(activeTodos()) }} className={classes.activeButton} variant="contained" color="primary">Active</Button>
+            <Button onClick={() => { setFilteredTodos(completedTodos()) }} className={classes.completedButton} variant="contained" color="primary">Completed</Button>
 
             <List>
                 {todosFolder &&
-                    todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => (
+                    filteredTodos.map((todo: firebase.firestore.DocumentData) => (
                         <TodoItem key={Math.random()} text={todo} currentTodos={todosFolder} index={todosFolder.todo.todos.indexOf(todo)} />
                     ))
                 }

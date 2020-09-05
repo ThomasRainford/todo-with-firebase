@@ -3,6 +3,7 @@ import { makeStyles, Theme, Card, CardContent } from '@material-ui/core'
 import TodoTitle from './TodoTitle';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';
+import TodoFilters from './TodoFilters';
 
 const useStyles = makeStyles((theme: Theme) => ({
     Todo: {

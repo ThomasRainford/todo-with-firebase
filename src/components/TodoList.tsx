@@ -1,6 +1,7 @@
 import React from 'react'
 import { List, Theme, makeStyles, Card, CardContent } from '@material-ui/core'
 import TodoItem from './TodoItem'
+import TodoFilters from './TodoFilters'
 
 const useStyles = makeStyles((theme: Theme) => ({
     TodoList: {
@@ -18,6 +19,7 @@ const TodoList: React.FC<Props> = ({ todosFolder }) => {
     return (
         <Card>
             <CardContent>
+                <TodoFilters />
                 <List>
                     {todosFolder &&
                         todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => (

@@ -24,6 +24,22 @@ interface Props {
 const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
     const classes = useStyles()
 
+    const allTodos = (): firebase.firestore.DocumentData[] => {
+        return todosFolder.todo.todos
+    }
+
+    const activeTodos = (): firebase.firestore.DocumentData[] => {
+        return todosFolder.todo.completed.filter((completed: firebase.firestore.DocumentData) => {
+            return completed
+        })
+    }
+
+    const completedTodos = (): firebase.firestore.DocumentData[] => {
+        return todosFolder.todo.completed.filter((completed: firebase.firestore.DocumentData) => {
+            return !completed
+        })
+    }
+
     return (
         <div className={classes.TodoFilters}>
             <Button className={classes.allButton} variant="contained" color="primary">All</Button>

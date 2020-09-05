@@ -1,5 +1,6 @@
 import React from 'react'
-import { makeStyles, Theme, Button } from '@material-ui/core'
+import { makeStyles, Theme, Button, List } from '@material-ui/core'
+import TodoItem from './TodoItem'
 
 const useStyles = makeStyles((theme: Theme) => ({
     TodoFilters: {
@@ -16,7 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }))
 
-const TodoFilters: React.FC = () => {
+interface Props {
+    todosFolder: firebase.firestore.DocumentData
+}
+
+const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
     const classes = useStyles()
 
     return (
@@ -24,6 +29,14 @@ const TodoFilters: React.FC = () => {
             <Button className={classes.allButton} variant="contained" color="primary">All</Button>
             <Button className={classes.activeButton} variant="contained" color="primary">Active</Button>
             <Button className={classes.completedButton} variant="contained" color="primary">Completed</Button>
+
+            <List>
+                {todosFolder &&
+                    todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => (
+                        <TodoItem key={Math.random()} text={todo} currentTodos={todosFolder} index={todosFolder.todo.todos.indexOf(todo)} />
+                    ))
+                }
+            </List>
         </div>
     )
 }

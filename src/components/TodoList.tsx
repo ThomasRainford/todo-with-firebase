@@ -19,14 +19,7 @@ const TodoList: React.FC<Props> = ({ todosFolder }) => {
     return (
         <Card>
             <CardContent>
-                <TodoFilters />
-                <List>
-                    {todosFolder &&
-                        todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => (
-                            <TodoItem key={Math.random()} text={todo} currentTodos={todosFolder} index={todosFolder.todo.todos.indexOf(todo)} />
-                        ))
-                    }
-                </List>
+                <TodoFilters todosFolder={todosFolder}/>
             </CardContent>
         </Card>
     )

@@ -1,5 +1,4 @@
 import { db, firebase } from '../firebase'
-import { useState } from 'react'
 
 interface Todo {
     text: string

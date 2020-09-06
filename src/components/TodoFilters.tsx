@@ -33,14 +33,15 @@ const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
     const [filter, setFilter] = useState<Filter>(Filter.All)
 
     const displayTodos = (): ReactNode => {
-
         if (filter === Filter.All) {
             return displayAll()
 
         } else if (filter === Filter.Active) {
             return displayActive()
-        }
         
+        } else if (filter === Filter.Complete) {
+            return displayComplete()
+        } 
     }
 
     const displayAll = (): ReactNode => {
@@ -52,11 +53,20 @@ const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
     const displayActive = (): ReactNode => {
         let index: number = 0
         return todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => {
-            const complete = todosFolder.todo.completed[index++]
+            const complete: boolean = todosFolder.todo.completed[index++]
             if(!complete) {
                 return <TodoItem key={Math.random()} text={todo} currentTodos={todosFolder} index={todosFolder.todo.todos.indexOf(todo)} />
             }
-            
+        })
+    }
+
+    const displayComplete = (): ReactNode => {
+        let index: number = 0
+        return todosFolder.todo.todos.map((todo: firebase.firestore.DocumentData) => {
+            const complete: boolean = todosFolder.todo.completed[index++]
+            if(complete) {
+                return <TodoItem key={Math.random()} text={todo} currentTodos={todosFolder} index={todosFolder.todo.todos.indexOf(todo)} />
+            }
         })
     }
 

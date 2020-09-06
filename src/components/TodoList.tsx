@@ -1,6 +1,5 @@
 import React from 'react'
-import { List, Theme, makeStyles, Card, CardContent } from '@material-ui/core'
-import TodoItem from './TodoItem'
+import { Theme, makeStyles, Card, CardContent } from '@material-ui/core'
 import TodoFilters from './TodoFilters'
 
 const useStyles = makeStyles((theme: Theme) => ({

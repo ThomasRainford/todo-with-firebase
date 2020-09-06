@@ -1,5 +1,5 @@
 import React, { useState, ReactNode } from 'react'
-import { makeStyles, Theme, Button, List } from '@material-ui/core'
+import { makeStyles, Theme, Button, List, ButtonGroup } from '@material-ui/core'
 import TodoItem from './TodoItem'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,6 +31,7 @@ const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
     const classes = useStyles()
 
     const [filter, setFilter] = useState<Filter>(Filter.All)
+    const [disabled, setDisabled] = useState({ all: true, active: false, complete: false })
 
     const displayTodos = (): ReactNode => {
         if (filter === Filter.All) {
@@ -72,9 +73,24 @@ const TodoFilters: React.FC<Props> = ({ todosFolder }) => {
 
     return (
         <div className={classes.TodoFilters}>
-            <Button onClick={() => { setFilter(Filter.All) }} className={classes.allButton} variant="contained" color="primary">All</Button>
-            <Button onClick={() => { setFilter(Filter.Active) }} className={classes.activeButton} variant="contained" color="primary">Active</Button>
-            <Button onClick={() => { setFilter(Filter.Complete) }} className={classes.completedButton} variant="contained" color="primary">Completed</Button>
+            <ButtonGroup>
+                <Button onClick={() => {
+                    setFilter(Filter.All)
+                    setDisabled({ all: true, active: false, complete: false })
+                }}
+                    className={classes.allButton} variant="contained" color="primary" disabled={disabled.all}>All</Button>
+                <Button onClick={() => {
+                    setFilter(Filter.Active)
+                    setDisabled({ all: false, active: true, complete: false })
+                }}
+                    className={classes.activeButton} variant="contained" color="primary" disabled={disabled.active}>Active</Button>
+                <Button onClick={() => {
+                    setFilter(Filter.Complete)
+                    setDisabled({ all: false, active: false, complete: true })
+                }}
+                    className={classes.completedButton} variant="contained" color="primary" disabled={disabled.complete}>Completed</Button>
+            </ButtonGroup>
+
 
             <List>
                 {todosFolder &&

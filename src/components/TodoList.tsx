@@ -18,7 +18,7 @@ const TodoList: React.FC<Props> = ({ todosFolder }) => {
     return (
         <Card>
             <CardContent>
-                <TodoFilters todosFolder={todosFolder}/>
+                <TodoFilters todosFolder={todosFolder} />
             </CardContent>
         </Card>
     )

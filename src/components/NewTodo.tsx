@@ -34,7 +34,7 @@ const NewTodo: React.FC<Props> = ({ currentTodo }) => {
     const doAddTodo = () => { setDisplayInput(true) }
     const doNotAddTodo = () => { setDisplayInput(false) }
 
-    const [ pushTodos ] = useFirebaseFirestorePush(currentTodo)
+    const [pushTodos] = useFirebaseFirestorePush(currentTodo)
 
     return (
         <div className={classes.NewTodo}>

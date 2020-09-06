@@ -26,7 +26,7 @@ const TodoContainer: React.FC<Props> = ({ allTodos: todosFolder, index }) => {
         <div className={classes.Todo}>
             {todosFolder &&
                 <div>
-                    <Card style={{backgroundColor: '#ECF0F1'}}>
+                    <Card style={{ backgroundColor: '#ECF0F1' }}>
                         <CardContent>
                             <TodoTitle todosFolder={todosFolder[index]} />
                             <NewTodo currentTodo={todosFolder[index]} />

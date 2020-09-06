@@ -48,7 +48,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodos, index }) => {
 
     const handleCheckbox = () => {
         editCompleted()
-        
+
     }
 
     const setTodoText = () => {

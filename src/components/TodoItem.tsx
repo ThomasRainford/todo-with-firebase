@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     TodoItem: {
         flexGrow: 1,
         //backgroundColor: '#CBB9B6',
+        margin: theme.spacing(0.5)
     },
     editIcon: {
         paddingRight: '2%'
@@ -25,10 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundColor: '#EAF2F8'
     }
 }))
-
-interface Todo {
-    text: string
-}
 
 interface Props {
     text: firebase.firestore.DocumentData
@@ -50,11 +47,10 @@ const TodoItem: React.FC<Props> = ({ text, currentTodos, index }) => {
 
     useEffect(() => {
         setIsChecked(currentTodos.todo.completed[index])
-    }, [currentTodos])
+    }, [index, currentTodos.todo.completed])
 
     const handleCheckbox = () => {
         editCompleted()
-
     }
 
     const setTodoText = () => {

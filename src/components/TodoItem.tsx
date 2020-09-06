@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     removeIcon: {
         paddingLeft: '2%'
     },
+    activeTodo: {
+        backgroundColor: 'white'
+    },
+    completeTodo: {
+        backgroundColor: '#EAF2F8'
+    }
 }))
 
 interface Todo {
@@ -65,7 +71,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodos, index }) => {
 
     return (
         <div className={classes.TodoItem}>
-            <ListItem>
+            <ListItem className={isChecked ? classes.completeTodo : classes.activeTodo}>
                 <Checkbox
                     style={{ marginRight: '1%' }}
                     checked={isChecked}

@@ -90,7 +90,7 @@ const TodoItem: React.FC<Props> = ({ text, currentTodos, index }) => {
                     </IconButton>
                 </div>
             </ListItem>
-            <Divider />
+            <Divider light={true}/>
         </div>
     )
 }

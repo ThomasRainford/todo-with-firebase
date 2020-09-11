@@ -4,8 +4,8 @@ import NavBar from './components/NavBar'
 import TodoContainer from './components/TodoContainer'
 import useFirebaseFirestorePull from '../src/hooks/useFirebaseFirestorePull'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { CssBaseline, Switch } from '@material-ui/core'
-import { Router, Route } from 'react-router-dom'
+import { CssBaseline } from '@material-ui/core'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './components/HomePage/HomePage'
 
 const theme = createMuiTheme()

@@ -3,6 +3,12 @@ import './App.css'
 import NavBar from './components/NavBar'
 import TodoContainer from './components/TodoContainer'
 import useFirebaseFirestorePull from '../src/hooks/useFirebaseFirestorePull'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { CssBaseline, Switch } from '@material-ui/core'
+import { Router, Route } from 'react-router-dom'
+import HomePage from './components/HomePage/HomePage'
+
+const theme = createMuiTheme()
 
 const App: React.FC = () => {
   const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
@@ -13,12 +19,22 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <div className="App">
-      <NavBar />
-      {allTodos &&
-        <TodoContainer allTodos={allTodos} index={index} />
-      }
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+        </Switch>
+      </Router>
+    </MuiThemeProvider>
+
+
+    // <div className="App">
+    //   <NavBar />
+    //   {allTodos &&
+    //     <TodoContainer allTodos={allTodos} index={index} />
+    //   }
+    // </div>
   )
 }
 

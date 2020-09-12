@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './components/HomePage/HomePage'
 import LoginPage from './components/LoginPage/LoginPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
+import DashboardPage from './components/DashboardPage/DashboardPage'
 
 const theme = createMuiTheme()
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/dashboard" component={DashboardPage} />
         </Switch>
       </Router>
     </MuiThemeProvider>

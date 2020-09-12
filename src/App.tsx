@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './App.css'
-import NavBar from './components/NavBar'
-import TodoContainer from './components/TodoContainer'
-import useFirebaseFirestorePull from '../src/hooks/useFirebaseFirestorePull'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -14,12 +11,14 @@ import DashboardPage from './components/DashboardPage/DashboardPage'
 const theme = createMuiTheme()
 
 const App: React.FC = () => {
-  const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
-  const [index, setIndex] = useState<number>(1)
+  // const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
+  // const [index, setIndex] = useState<number>(1)
 
-  useEffect(() => {
-    pullTodos()
-  }, [])
+  // useEffect(() => {
+  //   pullTodos()
+  // }, [])
+
+  const [firebaseInitialised, setFirebaseInitialised] = useState<boolean>(false)
 
   return (
     <MuiThemeProvider theme={theme}>

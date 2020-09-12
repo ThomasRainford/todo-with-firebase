@@ -1,26 +1,12 @@
-import React from 'react'
-import { Theme, makeStyles, Typography, Avatar, Button, Paper } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { Theme, makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import NavBar from '../NavBar'
+import TodoContainer from '../TodoContainer'
+import useFirebaseFirestorePull from '../../hooks/useFirebaseFirestorePull'
 
 const useStyles = makeStyles((theme: Theme) => ({
-    main: {
-        width: 'auto',
-        display: 'block', // Fix IE 11 issue.
-        marginLeft: theme.spacing(3),
-        marginRight: theme.spacing(3),
-        [theme.breakpoints.up(400 + theme.spacing(3) * 2)]: {
-            width: 400,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
-    }
+
 }))
 
 
@@ -29,12 +15,22 @@ const DashboardPage: React.FC = () => {
 
     const history = useHistory()
 
+    const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
+    const [index, setIndex] = useState<number>(1)
+
+    useEffect(() => {
+        pullTodos()
+    }, [])
+
     return (
-        <main className={classes.main}>
-            <Paper className={classes.paper}>
-                <Typography>Dashboard</Typography>
-            </Paper>
-        </main>
+
+        <div className="App">
+            <NavBar />
+            {allTodos &&
+                <TodoContainer allTodos={allTodos} index={index} />
+            }
+        </div>
+
     )
 }
 

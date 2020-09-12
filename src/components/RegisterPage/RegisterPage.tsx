@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useHistory } from 'react-router-dom'
+import { auth } from 'firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
-    main: {
+	main: {
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
 		marginLeft: theme.spacing(3),
@@ -38,12 +39,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const RegisterPage: React.FC = () => {
 	const classes = useStyles()
-	
+
 	const history = useHistory()
 
-    const [name, setName] = useState('')
+	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+	const register = async (): Promise<void> => {
+		try {
+			await auth().createUserWithEmailAndPassword(email, password)
+			history.push('/dashboard')
+			return auth().currentUser?.updateProfile({
+				displayName: name
+			})
+		} catch (error) {
+			alert(error.message)
+		}
+	}
 
 	return (
 		<main className={classes.main}>
@@ -54,25 +67,25 @@ const RegisterPage: React.FC = () => {
 				<Typography component="h1" variant="h5">
 					Register Account
        			</Typography>
-				<form className={classes.form} onSubmit={e => e.preventDefault() }>
+				<form className={classes.form} onSubmit={e => e.preventDefault()}>
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="name">Name</InputLabel>
 						<Input id="name" name="name" autoComplete="off" autoFocus value={name} onChange={e => setName(e.target.value)} />
 					</FormControl>
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="email">Email Address</InputLabel>
-						<Input id="email" name="email" autoComplete="off" value={email} onChange={e => setEmail(e.target.value)}  />
+						<Input id="email" name="email" autoComplete="off" value={email} onChange={e => setEmail(e.target.value)} />
 					</FormControl>
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="password">Password</InputLabel>
-						<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)}  />
+						<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)} />
 					</FormControl>
 					<Button
 						type="submit"
 						fullWidth
 						variant="contained"
 						color="primary"
-						onClick={() => {}}
+						onClick={() => { register() }}
 						className={classes.submit}>
 						Register
           			</Button>
@@ -82,13 +95,13 @@ const RegisterPage: React.FC = () => {
 						variant="contained"
 						color="secondary"
 						className={classes.submit}
-						onClick={() => {history.push('/login')}}>
+						onClick={() => { history.push('/login') }}>
 						Go back to Login
           			</Button>
 				</form>
 			</Paper>
 		</main>
-    )
+	)
 }
 
 export default RegisterPage

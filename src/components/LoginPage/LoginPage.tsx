@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useHistory } from 'react-router-dom'
+import { auth } from 'firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
     main: {
@@ -44,6 +45,16 @@ const LoginPage: React.FC = () => {
     const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 
+
+	const login = async () => {
+		try {
+			await auth().signInWithEmailAndPassword(email, password)
+			history.push('/dashboard')
+		} catch (error) {
+			alert(error.message)
+		}
+	}
+
     return (
         <main className={classes.main}>
 			<Paper className={classes.paper}>
@@ -67,7 +78,7 @@ const LoginPage: React.FC = () => {
 						fullWidth
 						variant="contained"
 						color="primary"
-						onClick={() => {}}
+						onClick={() => { login() }}
 						className={classes.submit}>
 						Sign in
           			</Button>

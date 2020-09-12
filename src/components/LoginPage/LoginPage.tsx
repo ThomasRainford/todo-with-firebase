@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useHistory } from 'react-router-dom'
-import { auth } from 'firebase'
+import { auth, firebase } from '../../firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
     main: {
@@ -47,9 +47,15 @@ const LoginPage: React.FC = () => {
 
 
 	const login = () => {
-		auth().signInWithEmailAndPassword(email, password)
+		auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
 		.then(() => {
-			history.push('/dashboard')
+			return auth.signInWithEmailAndPassword(email, password)
+			.then(() => {
+				history.push('/dashboard')
+			})
+			.catch ((error) => {
+				alert(error.message)
+			})
 		})
 		.catch((error) => {
 			alert(error.message)

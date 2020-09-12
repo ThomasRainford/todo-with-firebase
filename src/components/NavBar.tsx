@@ -1,5 +1,7 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, Button, makeStyles, Theme } from '@material-ui/core'
+import { auth } from 'firebase';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
     NavBar: {
@@ -19,6 +21,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const NavBar: React.FC = () => {
     const classes = useStyles()
+    const history = useHistory()
+
+    const signOut = () => {
+        auth().signOut()
+        .then(() => {
+            history.push('/')
+        })
+    }
 
     return (
         <div className={classes.NavBar}>
@@ -26,7 +36,10 @@ const NavBar: React.FC = () => {
                 <Toolbar>
                     <Typography className={classes.title} variant="h6">ToDoApp</Typography>
                     <div className={classes.navbarButtons}>
-                        <Button color="inherit">Login</Button>
+                        <Button
+                            color="inherit"
+                            onClick={() => {signOut()}}>
+                            Log Out</Button>
                     </div>
                 </Toolbar>
             </AppBar>

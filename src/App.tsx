@@ -19,16 +19,13 @@ const App: React.FC = () => {
   //   pullTodos()
   // }, [])
 
-  const [firebaseInitialised, setFirebaseInitialised] = useState<boolean>(false)
+  //const [user, setUser] = useState<firebase.User | null>(null)
 
   // useEffect(() => {
-  //   new Promise<any>(resolve => {
-  //     return auth().onAuthStateChanged(resolve)
-
-  //   }).then((value) => {
-  //     setFirebaseInitialised(value)
-  //   })
-  // })
+  //   auth().onAuthStateChanged((user: firebase.User) => {
+  //     setUser(user)
+  //   });
+  // }, [])
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -50,7 +47,7 @@ const App: React.FC = () => {
     //     <TodoContainer allTodos={allTodos} index={index} />
     //   }
     // </div>
-  ) 
+  )
 }
 
 export default App

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useHistory } from 'react-router-dom'
-import { auth } from 'firebase'
+import { auth } from '../../firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
 	main: {
@@ -46,7 +46,7 @@ const RegisterPage: React.FC = () => {
 	const [password, setPassword] = useState<string>('')
 
 	const register = () => {
-		auth().createUserWithEmailAndPassword(email, password)
+		auth.createUserWithEmailAndPassword(email, password)
 		.then((authUser) => {
 			history.push('/dashboard')
 			return authUser.user?.updateProfile({

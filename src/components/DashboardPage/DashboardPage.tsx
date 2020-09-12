@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import NavBar from '../NavBar'
 import TodoContainer from '../TodoContainer'
 import useFirebaseFirestorePull from '../../hooks/useFirebaseFirestorePull'
-import { auth } from 'firebase'
+import { auth } from '../../firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
 
@@ -20,7 +20,7 @@ const DashboardPage: React.FC = () => {
     const [index, setIndex] = useState<number>(1)
 
     useEffect(() => {
-        if(!auth().currentUser) {
+        if(!auth.currentUser) {
             alert('Please log in!')
             history.push('/login')
         } else {

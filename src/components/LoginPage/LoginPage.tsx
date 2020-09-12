@@ -46,13 +46,14 @@ const LoginPage: React.FC = () => {
 	const [password, setPassword] = useState<string>('')
 
 
-	const login = async () => {
-		try {
-			await auth().signInWithEmailAndPassword(email, password)
+	const login = () => {
+		auth().signInWithEmailAndPassword(email, password)
+		.then(() => {
 			history.push('/dashboard')
-		} catch (error) {
+		})
+		.catch((error) => {
 			alert(error.message)
-		}
+		})
 	}
 
     return (

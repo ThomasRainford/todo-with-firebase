@@ -39,16 +39,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const RegisterPage: React.FC = () => {
 	const classes = useStyles()
-
 	const history = useHistory()
 
-	const [name, setName] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [name, setName] = useState<string>('')
+	const [email, setEmail] = useState<string>('')
+	const [password, setPassword] = useState<string>('')
 
-	const register = async (event: any): Promise<void> => {
-		event.preventDefault()
-
+	const register = () => {
 		auth().createUserWithEmailAndPassword(email, password)
 		.then((authUser) => {
 			history.push('/dashboard')
@@ -87,7 +84,7 @@ const RegisterPage: React.FC = () => {
 						fullWidth
 						variant="contained"
 						color="primary"
-						onClick={(event: any) => { register(event) }}
+						onClick={() => { register() }}
 						className={classes.submit}>
 						Register
           			</Button>

@@ -26,7 +26,7 @@ const DashboardPage: React.FC = () => {
         } else {
             pullTodos()
         }
-    }, [history, pullTodos])
+    }, [])
 
     return (
         <div className="App">

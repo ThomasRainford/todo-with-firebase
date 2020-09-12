@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Theme, makeStyles } from '@material-ui/core'
+import { Theme, makeStyles, CircularProgress } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import NavBar from '../NavBar'
 import TodoContainer from '../TodoContainer'
@@ -19,19 +19,25 @@ const DashboardPage: React.FC = () => {
     const [index, setIndex] = useState<number>(1)
 
     useEffect(() => {
-        if (!auth.currentUser && !allTodos) {
-            alert('Please log in!')
-            history.push('/login')
-        } else {
-            pullTodos()
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (!user) {
+                alert('Please log in!')
+                history.push('/login')
+            }
+        })
+        pullTodos()
+
+        return () => {
+            unsubscribe()
         }
     }, [])
 
     return (
         <div className="App">
             <NavBar />
-            {allTodos &&
+            {allTodos ?
                 <TodoContainer allTodos={allTodos} index={index} />
+                : <CircularProgress />
             }
         </div>
     )

@@ -23,6 +23,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
+      console.log('change: ', user)
       setUser(user)
     });
   }, [])

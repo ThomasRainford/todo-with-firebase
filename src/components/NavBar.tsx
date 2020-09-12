@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, Button, makeStyles, Theme } from '@material-ui/core'
-import { auth } from 'firebase';
+import { auth } from '../firebase';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,8 +24,9 @@ const NavBar: React.FC = () => {
     const history = useHistory()
 
     const signOut = () => {
-        auth().signOut()
+        auth.signOut()
         .then(() => {
+            console.log(auth.currentUser)
             history.push('/')
         })
     }

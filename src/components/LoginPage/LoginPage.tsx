@@ -48,14 +48,9 @@ const LoginPage: React.FC = () => {
 
 	const login = () => {
 		auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-		.then(() => {
-			return auth.signInWithEmailAndPassword(email, password)
-			.then(() => {
-				history.push('/dashboard')
-			})
-			.catch ((error) => {
-				alert(error.message)
-			})
+		.then(async () => {
+			await auth.signInWithEmailAndPassword(email, password)
+			history.push('/dashboard')
 		})
 		.catch((error) => {
 			alert(error.message)

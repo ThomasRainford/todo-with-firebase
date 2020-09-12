@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 }))
 
-
 const DashboardPage: React.FC = () => {
     const classes = useStyles()
 
@@ -20,7 +19,7 @@ const DashboardPage: React.FC = () => {
     const [index, setIndex] = useState<number>(1)
 
     useEffect(() => {
-        if(!auth.currentUser) {
+        if (!auth.currentUser && !allTodos) {
             alert('Please log in!')
             history.push('/login')
         } else {
@@ -35,7 +34,6 @@ const DashboardPage: React.FC = () => {
                 <TodoContainer allTodos={allTodos} index={index} />
             }
         </div>
-
     )
 }
 

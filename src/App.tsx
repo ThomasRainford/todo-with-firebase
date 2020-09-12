@@ -7,7 +7,7 @@ import HomePage from './components/HomePage/HomePage'
 import LoginPage from './components/LoginPage/LoginPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
 import DashboardPage from './components/DashboardPage/DashboardPage'
-import { auth } from 'firebase'
+import { auth } from './firebase'
 
 const theme = createMuiTheme()
 
@@ -19,13 +19,13 @@ const App: React.FC = () => {
   //   pullTodos()
   // }, [])
 
-  //const [user, setUser] = useState<firebase.User | null>(null)
+  const [user, setUser] = useState<firebase.User | null>(null)
 
-  // useEffect(() => {
-  //   auth().onAuthStateChanged((user: firebase.User) => {
-  //     setUser(user)
-  //   });
-  // }, [])
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user)
+    });
+  }, [])
 
   return (
     <MuiThemeProvider theme={theme}>

@@ -19,12 +19,8 @@ const DashboardPage: React.FC = () => {
     const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
     const [index, setIndex] = useState<number>(1)
 
-    const getCurrentUsername = (): string | null | undefined => {
-        return auth().currentUser?.displayName
-    }
-
     useEffect(() => {
-        if(!getCurrentUsername()) {
+        if(!auth().currentUser) {
             alert('Please log in!')
             history.push('/login')
         } else {
@@ -33,7 +29,6 @@ const DashboardPage: React.FC = () => {
     }, [history, pullTodos])
 
     return (
-
         <div className="App">
             <NavBar />
             {allTodos &&

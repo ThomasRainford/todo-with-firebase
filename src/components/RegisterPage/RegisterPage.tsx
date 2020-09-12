@@ -46,7 +46,9 @@ const RegisterPage: React.FC = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const register = async (): Promise<void> => {
+	const register = async (event: any): Promise<void> => {
+		event.preventDefault()
+
 		auth().createUserWithEmailAndPassword(email, password)
 		.then((authUser) => {
 			history.push('/dashboard')
@@ -85,7 +87,7 @@ const RegisterPage: React.FC = () => {
 						fullWidth
 						variant="contained"
 						color="primary"
-						onClick={() => { register() }}
+						onClick={(event: any) => { register(event) }}
 						className={classes.submit}>
 						Register
           			</Button>

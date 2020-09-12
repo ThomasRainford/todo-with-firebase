@@ -1,6 +1,7 @@
 import React from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper } from '@material-ui/core'
 import { VerifiedUserOutlined } from '@material-ui/icons'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) => ({
     main: {
@@ -34,6 +35,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const HomePage: React.FC = () => {
     const classes = useStyles()
 
+    const history = useHistory()
+
     return (
         <main className={classes.main}>
             <Paper className={classes.paper}>
@@ -48,7 +51,8 @@ const HomePage: React.FC = () => {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}>
+                        className={classes.submit}
+                        onClick={() => {history.push('/register')}}>
                         Register
           		    </Button>
                     <Button
@@ -56,7 +60,8 @@ const HomePage: React.FC = () => {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}>
+                        className={classes.submit}
+                        onClick={() => {history.push('/login')}}>
                         Login
           		    </Button>
                     <Button
@@ -64,7 +69,8 @@ const HomePage: React.FC = () => {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}>
+                        className={classes.submit}
+                        onClick={() => {history.push('/dashboard')}}>
                         Dashboard
           		    </Button>
             </Paper>

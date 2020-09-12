@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) => ({
     main: {
@@ -36,7 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 
 const LoginPage: React.FC = () => {
-    const classes = useStyles()
+	const classes = useStyles()
+	
+	const history = useHistory()
 
     const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
@@ -73,7 +76,8 @@ const LoginPage: React.FC = () => {
 						fullWidth
 						variant="contained"
 						color="primary"
-						className={classes.submit}>
+						className={classes.submit}
+						onClick={() => {history.push('/register')}}>
 						Register
           			</Button>
 				</form>

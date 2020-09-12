@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { CssBaseline } from '@material-ui/core'
+import { CircularProgress, CssBaseline } from '@material-ui/core'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './components/HomePage/HomePage'
 import LoginPage from './components/LoginPage/LoginPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
 import DashboardPage from './components/DashboardPage/DashboardPage'
+import { auth } from 'firebase'
 
 const theme = createMuiTheme()
 
@@ -19,6 +20,15 @@ const App: React.FC = () => {
   // }, [])
 
   const [firebaseInitialised, setFirebaseInitialised] = useState<boolean>(false)
+
+  // useEffect(() => {
+  //   new Promise<any>(resolve => {
+  //     return auth().onAuthStateChanged(resolve)
+
+  //   }).then((value) => {
+  //     setFirebaseInitialised(value)
+  //   })
+  // })
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -40,7 +50,7 @@ const App: React.FC = () => {
     //     <TodoContainer allTodos={allTodos} index={index} />
     //   }
     // </div>
-  )
+  ) 
 }
 
 export default App

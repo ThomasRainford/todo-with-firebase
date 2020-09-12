@@ -47,15 +47,15 @@ const RegisterPage: React.FC = () => {
 	const [password, setPassword] = useState('')
 
 	const register = async (): Promise<void> => {
-		try {
-			await auth().createUserWithEmailAndPassword(email, password)
+		auth().createUserWithEmailAndPassword(email, password)
+		.then((authUser) => {
 			history.push('/dashboard')
-			return auth().currentUser?.updateProfile({
+			return authUser.user?.updateProfile({
 				displayName: name
 			})
-		} catch (error) {
+		}).catch((error) => {
 			alert(error.message)
-		}
+		})
 	}
 
 	return (

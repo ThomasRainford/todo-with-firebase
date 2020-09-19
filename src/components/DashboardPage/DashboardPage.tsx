@@ -7,7 +7,17 @@ import useFirebaseFirestorePull from '../../hooks/useFirebaseFirestorePull'
 import { auth } from '../../firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
+    DashboardPage: {
 
+    },
+    todoList: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    todoProgress: {
+        marginTop: '25%',
+    }
 }))
 
 const DashboardPage: React.FC = () => {
@@ -33,12 +43,16 @@ const DashboardPage: React.FC = () => {
     }, [])
 
     return (
-        <div className="App">
+        <div className={classes.DashboardPage}>
             <NavBar />
+
             {allTodos ?
                 <TodoContainer allTodos={allTodos} index={index} />
-                : <CircularProgress />
+                : <div className={classes.todoList}>
+                    <CircularProgress className={classes.todoProgress} />
+                </div>
             }
+
         </div>
     )
 }

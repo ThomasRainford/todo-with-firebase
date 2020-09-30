@@ -27,17 +27,19 @@ const DashboardPage: React.FC = () => {
 
     const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
     const [index, setIndex] = useState<number>(1)
+    const [empty, setEmpty] = useState<boolean>(false)
 
-    const empty = () => {
+    const checkListDoc = () => {
         auth.onAuthStateChanged(async (user) => {
-            if(user !== null) {
-                const doc = await db.collection('users').doc(user.uid).collection('todoLists').doc('list-0').get()
-                console.log(doc.data())
+            if (user !== null) {
+                const doc = await db.collection('users').doc(user.uid).get()
+                if (doc.data() === {}) {
+                    setEmpty(true)
+                }
             } else {
                 console.log("PROBLEM")
             }
         })
-
     }
 
     useEffect(() => {
@@ -49,7 +51,7 @@ const DashboardPage: React.FC = () => {
         })
         pullTodos()
 
-        empty()
+        checkListDoc()
 
         return () => {
             unsubscribe()
@@ -66,6 +68,7 @@ const DashboardPage: React.FC = () => {
                     <CircularProgress className={classes.todoProgress} />
                 </div>
             }
+        
         </div>
     )
 }

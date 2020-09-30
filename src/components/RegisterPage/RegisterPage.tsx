@@ -48,7 +48,7 @@ const RegisterPage: React.FC = () => {
 	const register = () => {
 		auth.createUserWithEmailAndPassword(email, password)
 		.then((authUser) => {
-			db.collection('users').doc(authUser.user?.uid).collection('todoLists').doc('list-0').set({})
+			db.collection('users').doc(authUser.user?.uid).set({})
 			history.push('/dashboard')
 			return authUser.user?.updateProfile({
 				displayName: name

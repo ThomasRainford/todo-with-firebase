@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Theme, makeStyles, Typography, Avatar, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useHistory } from 'react-router-dom'
@@ -47,7 +47,7 @@ const LoginPage: React.FC = () => {
 
 
 	const login = () => {
-		auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+		auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 		.then(async () => {
 			await auth.signInWithEmailAndPassword(email, password)
 			history.push('/dashboard')

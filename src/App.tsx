@@ -19,14 +19,16 @@ const App: React.FC = () => {
   //   pullTodos()
   // }, [])
 
-  const [user, setUser] = useState<firebase.User | null>(null)
+  // const [user, setUser] = useState<firebase.User | null>(null)
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      console.log('change: ', user)
-      setUser(user)
-    });
-  }, [])
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((user) => {
+  //     console.log('change: ', user)
+  //     setUser(user)
+  //   });
+  // }, [])
+
+
 
   return (
     <MuiThemeProvider theme={theme}>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Theme, makeStyles, CircularProgress } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import NavBar from '../NavBar'
 import TodoContainer from '../TodoContainer'
 import useFirebaseFirestorePull from '../../hooks/useFirebaseFirestorePull'
-import { auth } from '../../firebase'
+import { auth, db } from '../../firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
     DashboardPage: {
@@ -28,6 +28,18 @@ const DashboardPage: React.FC = () => {
     const [{ allTodos }, pullTodos] = useFirebaseFirestorePull()
     const [index, setIndex] = useState<number>(1)
 
+    const empty = () => {
+        auth.onAuthStateChanged(async (user) => {
+            if(user !== null) {
+                const doc = await db.collection('users').doc(user.uid).collection('todoLists').doc('list-0').get()
+                console.log(doc.data())
+            } else {
+                console.log("PROBLEM")
+            }
+        })
+
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (!user) {
@@ -36,6 +48,8 @@ const DashboardPage: React.FC = () => {
             }
         })
         pullTodos()
+
+        empty()
 
         return () => {
             unsubscribe()
@@ -52,7 +66,6 @@ const DashboardPage: React.FC = () => {
                     <CircularProgress className={classes.todoProgress} />
                 </div>
             }
-
         </div>
     )
 }
